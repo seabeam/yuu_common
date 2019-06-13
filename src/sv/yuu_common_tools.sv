@@ -2,12 +2,12 @@
 // Copyright 2019 seabeam@yahoo.com - Licensed under the Apache License, Version 2.0
 // For more information, see LICENCE in the main folder
 /////////////////////////////////////////////////////////////////////////////////////
-`ifndef COMMON_TOOLS_SV
-`define COMMON_TOOLS_SV
+`ifndef YUU_COMMON_TOOLS_SV
+`define YUU_COMMON_TOOLS_SV
 
 // Print object based on string type which used to common object printer.
 // The content arranged with 2D array.
-class common_print_object;
+class yuu_common_print_object;
   // Data member
   string item[][];
   string tp_item[][];
@@ -53,7 +53,7 @@ class common_print_object;
     has_transposed = 1'b1;
   endfunction
 
-  function void copy(common_print_object rhs);
+  function void copy(yuu_common_print_object rhs);
     if (rhs == null) begin
       $display("Error", "rhs print object haven't been allocated");
       return;
@@ -69,26 +69,26 @@ class common_print_object;
     init_tp_item(row, col);
     transpose();
   endfunction
-endclass: common_print_object
+endclass: yuu_common_print_object
 
 
-class common_printer;
-  static local common_printer m_inst;
+class yuu_common_printer;
+  static local yuu_common_printer m_inst;
 
-  protected common_print_object object;
+  protected yuu_common_print_object object;
   protected int col_width_queue[$];
   
   local function new();
   endfunction
 
-  static function common_printer get_printer();
+  static function yuu_common_printer get_printer();
     if (m_inst == null)
       m_inst = new;
     
     return m_inst;
   endfunction
 
-  function void set_object(common_print_object rhs);
+  function void set_object(yuu_common_print_object rhs);
     this.object = new(1, 1);
     this.object.copy(rhs);
     col_width_queue.delete();
@@ -139,7 +139,7 @@ class common_printer;
       col_width_queue.push_back(object.get_max_length(i));
     end
   endfunction
-endclass: common_printer
+endclass: yuu_common_printer
 
 
 // Configuration file parser.
@@ -155,11 +155,11 @@ endclass: common_printer
 //
 //    ## Config end
 // The comment is also supported but with no =' symbol
-class common_config_parser;
-  static local common_config_parser m_inst;
+class yuu_common_config_parser;
+  static local yuu_common_config_parser m_inst;
   protected string value[string];
 
-  static function common_config_parser get_config_parser();
+  static function yuu_common_config_parser get_config_parser();
     if (m_inst == null)
       m_inst = new;
 
@@ -190,6 +190,6 @@ class common_config_parser;
       value[key] = "";
     return value[key];
   endfunction
-endclass : common_config_parser
+endclass : yuu_common_config_parser
 
 `endif
