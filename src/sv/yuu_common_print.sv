@@ -55,7 +55,7 @@ class yuu_common_print_object;
 
   function void copy(yuu_common_print_object rhs);
     if (rhs == null) begin
-      $display("Error", "rhs print object haven't been allocated");
+      $display("[Error] rhs print object haven't been allocated");
       return;
     end
 
@@ -99,7 +99,7 @@ class yuu_common_printer;
     string cross_divider;
 
     if (this.object == null) begin
-      $display("Error", "Call set_object() to set print object first");;
+      $display("[Error] Call set_object() to set print object first");;
       return;
     end
 
