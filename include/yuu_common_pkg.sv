@@ -12,6 +12,8 @@ package yuu_common_pkg;
   } boolean;
 
   `include "yuu_common_tools.sv"
+  `include "yuu_common_print.sv"
+  `include "yuu_common_config_parser.sv"
 endpackage
 
 `endif
