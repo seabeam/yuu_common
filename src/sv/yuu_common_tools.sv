@@ -5,8 +5,11 @@
 `ifndef YUU_COMMON_TOOLS_SV
 `define YUU_COMMON_TOOLS_SV
 
+virtual class yuu_common_base;
+endclass
+
 // Utilities class
-class yuu_common_tools;
+class yuu_common_tools extends yuu_common_base;
   static function boolean is_byte_align(int width, bit[7:0] addr, ref bit[7:0] addr_aligned);
     int byte_num = width/8;
 

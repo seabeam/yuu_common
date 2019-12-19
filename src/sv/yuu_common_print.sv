@@ -7,7 +7,7 @@
 
 // Print object based on string type which used to common object printer.
 // The content arranged with 2D array.
-class yuu_common_print_object;
+class yuu_common_print_object extends yuu_common_base;
   // Data member
   string item[][];
   string tp_item[][];
@@ -72,7 +72,7 @@ class yuu_common_print_object;
 endclass: yuu_common_print_object
 
 
-class yuu_common_printer;
+class yuu_common_printer extends yuu_common_base;
   static local yuu_common_printer m_inst;
 
   protected yuu_common_print_object object;
@@ -99,7 +99,7 @@ class yuu_common_printer;
     string cross_divider;
 
     if (this.object == null) begin
-      $display("[Error] Call set_object() to set print object first");;
+      $display("[Error] Call set_object() to set print object first");
       return;
     end
 
