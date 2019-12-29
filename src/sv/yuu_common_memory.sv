@@ -9,7 +9,7 @@ class yuu_common_memory extends yuu_common_base;
   protected yuu_common_mem_data_t val[yuu_common_mem_addr_t];
 
   yuu_common_mem_pattern_e  init_pattern;
-  boolean                   enable_byte_align;
+  boolean                   enable_byte_align = True;
   int unsigned              addr_width = `YUU_COMMON_MEM_ADDR_WIDTH;
   int unsigned              data_width = `YUU_COMMON_MEM_DATA_WIDTH;
   
@@ -48,10 +48,10 @@ class yuu_common_memory extends yuu_common_base;
                           data |= 32'hAAAA_AAAA<<(i*32);
                         end
         PATTERN_5A:     for (int i=0; i<$ceil(real'(data_width)/real'(32)); i++) begin
-                          data |= 32'h5A5A_5A5A<<(i*32);
+                          data |= 32'h55AA_55AA<<(i*32);
                         end
         PATTERN_A5:     for (int i=0; i<$ceil(real'(data_width)/real'(32)); i++) begin
-                          data |= 32'hA5A5_A5A5<<(i*32);
+                          data |= 32'hAA55_AA55<<(i*32);
                         end
         PATTERN_ADDRESS:data = addr;
         PATTERN_RANDOM: for (int i=0; i<$ceil(real'(data_width)/real'(32)); i++) begin

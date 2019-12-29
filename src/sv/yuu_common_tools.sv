@@ -11,9 +11,10 @@ endclass
 // Utilities class
 class yuu_common_tools extends yuu_common_base;
   static function boolean is_byte_align(int width, bit[7:0] addr, ref bit[7:0] addr_aligned);
-    int byte_num = width/8;
+    bit[7:0] byte_num = width/8;
+    bit[7:0] tmp = addr<<(8-$clog2(byte_num));
 
-    if (addr<<(8-$clog2(byte_num)) != 0) begin
+    if (tmp != 0) begin
       $display("[Warning] %s", $sformatf("Address (0x%h) is not byte aligned while width is %0d", addr, width));
       addr_aligned = addr;
       for (int i=0; i<$clog2(byte_num); i++)
