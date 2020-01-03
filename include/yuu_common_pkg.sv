@@ -14,6 +14,8 @@ package yuu_common_pkg;
   `include "yuu_common_print.sv"
   `include "yuu_common_config_parser.sv"
   `include "yuu_common_memory.sv"
+  `include "yuu_common_field.sv"
+  `include "yuu_common_register.sv"
 endpackage
 
 `endif
