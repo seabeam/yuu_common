@@ -5,7 +5,7 @@
 `ifndef YUU_COMMON_REGISTER_SV
 `define YUU_COMMON_REGISTER_SV
 
-class yuu_common_register extends yuu_common_base;
+class yuu_common_register;
   local string    m_name;
         bit[7:0]  offset;
         string    access = "RW";
@@ -32,8 +32,13 @@ class yuu_common_register extends yuu_common_base;
           fields[i].value[j] = value[fields[i].lsb+j];
       end
     end
-    else
+    else begin
+      `ifdef YUU_UVM
+      `uvm_error("write", "Atempt to write a Read ONLY register")      
+      `else
       $display("[Error] Atempt to write a Read ONLY register");
+      `endif
+    end
   endfunction
 
   function void read(output bit[7:0] value);
@@ -44,8 +49,13 @@ class yuu_common_register extends yuu_common_base;
           value[fields[i].lsb+j] = fields[i].value[j];
       end
     end
-    else
+    else begin
+      `ifdef YUU_UVM
+      `uvm_error("read", "Atempt to write a Write ONLY register")
+      `else
       $display("[Error] Atempt to write a Write ONLY register");
+      `endif
+    end
   endfunction
 
   function void add_field(yuu_common_field field);

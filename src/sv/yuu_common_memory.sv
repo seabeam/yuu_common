@@ -5,17 +5,17 @@
 `ifndef YUU_COMMON_MEMORY_SV
 `define YUU_COMMON_MEMORY_SV
 
-class yuu_common_memory extends yuu_common_base;
-  protected yuu_common_mem_data_t val[yuu_common_mem_addr_t];
+class yuu_common_memory;
+  protected yuu_common_data_t val[yuu_common_addr_t];
 
   yuu_common_mem_pattern_e  init_pattern;
   boolean                   enable_byte_align = True;
-  int unsigned              addr_width = `YUU_COMMON_MEM_ADDR_WIDTH;
-  int unsigned              data_width = `YUU_COMMON_MEM_DATA_WIDTH;
+  int unsigned              addr_width = `YUU_COMMON_ADDR_WIDTH;
+  int unsigned              data_width = `YUU_COMMON_DATA_WIDTH;
   
-  function void write(yuu_common_mem_addr_t   addr, 
-                      yuu_common_mem_data_t   data, 
-                      yuu_common_mem_strob_t  strob = -'h1);
+  function void write(yuu_common_addr_t   addr, 
+                      yuu_common_data_t   data, 
+                      yuu_common_strob_t  strob = -'h1);
     if (enable_byte_align) begin
       bit [7:0] addr_aligned;
       yuu_common_tools::is_byte_align(addr_width, addr, addr_aligned);
@@ -28,7 +28,7 @@ class yuu_common_memory extends yuu_common_base;
     end
   endfunction
 
-  task read(input yuu_common_mem_addr_t addr, output yuu_common_mem_data_t data);
+  task read(input yuu_common_addr_t addr, output yuu_common_data_t data);
     if (enable_byte_align) begin
       bit [7:0] addr_aligned;
       yuu_common_tools::is_byte_align(addr_width, addr, addr_aligned);
@@ -57,6 +57,8 @@ class yuu_common_memory extends yuu_common_base;
         PATTERN_RANDOM: for (int i=0; i<$ceil(real'(data_width)/real'(32)); i++) begin
                           data |= $random()<<(i*32);
                         end
+        PATTERN_ALL_X:  data = 'hx;
+        PATTERN_ALL_Z:  data = 'hz;
         default:        data = 'h0;
       endcase
     end

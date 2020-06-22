@@ -7,7 +7,7 @@
 
 // Print object based on string type which used to common object printer.
 // The content arranged with 2D array.
-class yuu_common_print_object extends yuu_common_base;
+class yuu_common_print_object;
   // Data member
   string item[][];
   string tp_item[][];
@@ -55,7 +55,11 @@ class yuu_common_print_object extends yuu_common_base;
 
   function void copy(yuu_common_print_object rhs);
     if (rhs == null) begin
+      `ifdef YUU_UVM
+      `uvm_error("copy", "rhs print object haven't been allocated")
+      `else
       $display("[Error] rhs print object haven't been allocated");
+      `endif
       return;
     end
 
@@ -72,7 +76,7 @@ class yuu_common_print_object extends yuu_common_base;
 endclass: yuu_common_print_object
 
 
-class yuu_common_printer extends yuu_common_base;
+class yuu_common_printer;
   static local yuu_common_printer m_inst;
 
   protected yuu_common_print_object object;
@@ -99,7 +103,11 @@ class yuu_common_printer extends yuu_common_base;
     string cross_divider;
 
     if (this.object == null) begin
+      `ifdef YUU_UVM
+      `uvm_error("print", "Call set_object() to set print object first")
+      `else
       $display("[Error] Call set_object() to set print object first");
+      `endif
       return;
     end
 

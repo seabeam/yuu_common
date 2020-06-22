@@ -8,13 +8,20 @@
 `include "yuu_common_define.svh"
 
 package yuu_common_pkg;
+  `ifdef YUU_UVM
+  import uvm_pkg::*;
+  `include "uvm_macros.svh"
+  `endif
+  
   `include "yuu_common_type.sv"
 
   `include "yuu_common_tools.sv"
-  `include "yuu_common_print.sv"
+  `include "yuu_common_addr_map.sv"
   `include "yuu_common_config_parser.sv"
-  `include "yuu_common_memory.sv"
   `include "yuu_common_field.sv"
+  `include "yuu_common_file.sv"
+  `include "yuu_common_memory.sv"
+  `include "yuu_common_print.sv"
   `include "yuu_common_register.sv"
 endpackage
 

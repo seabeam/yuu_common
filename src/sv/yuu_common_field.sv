@@ -6,7 +6,7 @@
 `define YUU_COMMON_FIELD_SV
 
 typedef class yuu_common_register;
-class yuu_common_field extends yuu_common_base;
+class yuu_common_field;
   yuu_common_register parent;
   
   local string    m_name;
@@ -43,7 +43,11 @@ class yuu_common_field extends yuu_common_base;
         this.value[i] = value[i];
     end
     else
+      `ifdef YUU_UVM
+      `uvm_error("write", "Atempt to write a Read ONLY field")
+      `else
       $display("[Error] Atempt to write a Read ONLY field");
+      `endif
   endfunction
 
   function void read(output bit[7:0] value);
@@ -53,7 +57,11 @@ class yuu_common_field extends yuu_common_base;
         value[i] = this.value[i];
     end
     else
+      `ifdef YUU_UVM
+      `uvm_error("write", "Atempt to write a Write ONLY field")
+      `else
       $display("[Error] Atempt to write a Write ONLY field");
+      `endif
   endfunction
 endclass
 

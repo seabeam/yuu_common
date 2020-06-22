@@ -18,7 +18,8 @@
 //
 //    ## Config end
 // The comment is also supported but with no =' symbol
-class yuu_common_config_parser extends yuu_common_base;
+
+class yuu_common_config_parser;
   static local yuu_common_config_parser m_inst;
   protected string value[string];
 
@@ -53,6 +54,6 @@ class yuu_common_config_parser extends yuu_common_base;
       value[key] = "";
     return value[key];
   endfunction
-endclass : yuu_common_config_parser
+endclass
 
 `endif
